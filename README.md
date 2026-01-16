@@ -189,9 +189,40 @@ Kiosko Cart → "Imprimir Ticket"
 - `pending`: Pendiente
 - `paid`: Pagado
 
+## 🔗 Sistema de URLs y Rutas
+
+El sistema utiliza **React Router** con URLs semánticas que incluyen identificadores:
+
+### URLs de Cliente
+```
+/cliente/:pharmacyId/:clientId     → Dashboard del cliente
+/perfil/:pharmacyId/:clientId      → Perfil del cliente
+/catalogo/:pharmacyId/:clientId    → Catálogo de productos
+/carrito/:pharmacyId/:clientId     → Carrito de compras
+```
+
+### URLs de Farmacia
+```
+/farmacia/:pharmacyId              → Dashboard de farmacia
+/catalogo-farmacia/:pharmacyId     → Catálogo de farmacia
+/asistente-ia/:pharmacyId          → Asistente IA
+```
+
+### URLs de Acceso
+```
+/qr/:pharmacyId                    → Acceso por QR de farmacia
+/login                             → Login de farmacias
+```
+
+### Ejemplo de flujo completo:
+1. Cliente escanea QR → `/qr/FM-2024-001`
+2. Se identifica con teléfono → busca cliente
+3. Accede a dashboard → `/cliente/FM-2024-001/CLI-7842`
+
 ## 🛠️ Tecnologías
 
 - **React 18** + TypeScript
+- **React Router DOM** (enrutamiento)
 - **Vite** (build tool)
 - **Tailwind CSS** (estilos)
 - **Lucide React** (iconografía)
