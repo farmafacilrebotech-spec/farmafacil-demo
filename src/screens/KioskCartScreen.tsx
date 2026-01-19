@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { ArrowLeft, Trash2, Plus, Minus, Printer, CreditCard } from 'lucide-react';
 import { MockupContainer } from '../components/MockupContainer';
 import { TPVModal } from '../components/TPVModal';
@@ -10,6 +11,9 @@ interface KioskCartScreenProps {
 }
 
 export const KioskCartScreen: React.FC<KioskCartScreenProps> = ({ onNavigate }) => {
+  const { pharmacyId } = useParams<{ pharmacyId: string }>();
+  const currentPharmacyId = pharmacyId || 'FM-2024-001';
+
   const [showTicket, setShowTicket] = useState(false);
   const [isPaid, setIsPaid] = useState(false);
   const [showTPVModal, setShowTPVModal] = useState(false);
@@ -134,7 +138,7 @@ export const KioskCartScreen: React.FC<KioskCartScreenProps> = ({ onNavigate }) 
         <div className="p-6 pb-4 bg-white border-b border-gray-100">
           <div className="flex items-center justify-between mb-4">
             <button
-              onClick={() => onNavigate('kiosk')}
+              onClick={() => onNavigate(`/kiosko/${currentPharmacyId}`)}
               className="text-gray-600 hover:text-gray-800 flex items-center gap-2"
             >
               <ArrowLeft className="w-5 h-5" />

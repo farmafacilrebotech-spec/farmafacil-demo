@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { Home, User, ShoppingBag, MessageSquare, Store, Tablet, LogIn, QrCode, ShoppingCart, Package } from 'lucide-react';
+import { Home, User, ShoppingBag, MessageSquare, Store, Tablet, LogIn, QrCode, ShoppingCart, Package, MoreVertical, X } from 'lucide-react';
 import { HomeScreen } from './screens/HomeScreen';
 import { LoginScreen } from './screens/LoginScreen';
 import { QRScanScreen } from './screens/QRScanScreen';
@@ -13,6 +14,8 @@ import { CartScreen } from './screens/CartScreen';
 import { AIAssistantScreen } from './screens/AIAssistantScreen';
 import { KioskScreen } from './screens/KioskScreen';
 import { KioskCartScreen } from './screens/KioskCartScreen';
+import { KioskCatalogScreen } from './screens/KioskCatalogScreen';
+import { KioskAIAssistantScreen } from './screens/KioskAIAssistantScreen';
 import { PharmacyQRScreen } from './screens/PharmacyQRScreen';
 
 // IDs de ejemplo para la demo
@@ -44,6 +47,7 @@ const getScreenRoute = (screen: string): string => {
 function AppContent() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   // Función de navegación que acepta tanto nombres de pantalla como rutas
   const handleNavigate = (screenOrRoute: string) => {
@@ -76,6 +80,9 @@ function AppContent() {
 
   const props = { onNavigate: handleNavigate };
 
+  // Detectar si estamos en modo kiosko
+  const isKioskMode = location.pathname.startsWith('/kiosko');
+
   // Función para verificar si la ruta actual coincide con un patrón
   const isActiveRoute = (routePattern: string): boolean => {
     const currentPath = location.pathname;
@@ -99,6 +106,8 @@ function AppContent() {
         <Route path="/asistente-ia/:pharmacyId" element={<AIAssistantScreen {...props} />} />
         <Route path="/kiosko/:pharmacyId" element={<KioskScreen {...props} />} />
         <Route path="/kiosko-carrito/:pharmacyId" element={<KioskCartScreen {...props} />} />
+        <Route path="/kiosko-catalogo/:pharmacyId" element={<KioskCatalogScreen {...props} />} />
+        <Route path="/kiosko-asistente/:pharmacyId" element={<KioskAIAssistantScreen {...props} />} />
         <Route path="/mi-qr/:pharmacyId" element={<PharmacyQRScreen {...props} />} />
         
         {/* Rutas con parámetros de farmacia y cliente */}
@@ -122,39 +131,79 @@ function AppContent() {
         <Route path="/asistente-ia" element={<AIAssistantScreen {...props} />} />
         <Route path="/kiosko" element={<KioskScreen {...props} />} />
         <Route path="/kiosko-carrito" element={<KioskCartScreen {...props} />} />
+        <Route path="/kiosko-catalogo" element={<KioskCatalogScreen {...props} />} />
+        <Route path="/kiosko-asistente" element={<KioskAIAssistantScreen {...props} />} />
         
         {/* Ruta por defecto para URLs no encontradas */}
         <Route path="*" element={<HomeScreen {...props} />} />
       </Routes>
       
-      {/* Navegación flotante */}
-      <div className="fixed bottom-4 left-4 bg-white rounded-2xl shadow-2xl p-2 max-w-[200px] z-50">
-        <div className="text-xs font-semibold text-gray-500 px-2 py-1 mb-1">
-          Navegación
-        </div>
-        <div className="grid grid-cols-3 gap-1 max-h-[300px] overflow-y-auto">
-          {screens.map((screen) => {
-            const Icon = screen.icon;
-            return (
-              <button
-                key={screen.id}
-                onClick={() => navigate(screen.id)}
-                className={`p-2 rounded-lg transition-all ${
-                  isActiveRoute(screen.id)
-                    ? 'bg-[#00C8C8] text-white'
-                    : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
-                }`}
-                title={screen.label}
-              >
-                <Icon className="w-4 h-4 mx-auto" />
-                <span className="text-[10px] mt-1 block truncate">
-                  {screen.label}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
+      {/* Menú de navegación - OCULTO en modo kiosko */}
+      {!isKioskMode && (
+        <>
+          {/* Botón de menú - tres puntos */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="fixed top-4 left-4 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center z-50 hover:bg-gray-50 transition-all"
+            title="Menú de navegación"
+          >
+            {menuOpen ? (
+              <X className="w-5 h-5 text-gray-600" />
+            ) : (
+              <MoreVertical className="w-5 h-5 text-gray-600" />
+            )}
+          </button>
+
+          {/* Menú emergente */}
+          {menuOpen && (
+            <>
+              {/* Overlay para cerrar */}
+              <div 
+                className="fixed inset-0 bg-black/20 z-40"
+                onClick={() => setMenuOpen(false)}
+              />
+              
+              {/* Panel del menú */}
+              <div className="fixed top-16 left-4 bg-white rounded-2xl shadow-2xl p-3 w-64 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide px-2 py-1 mb-2">
+                  Demo - Navegación
+                </div>
+                <div className="max-h-[70vh] overflow-y-auto space-y-1">
+                  {screens.map((screen) => {
+                    const Icon = screen.icon;
+                    const isActive = isActiveRoute(screen.id);
+                    return (
+                      <button
+                        key={screen.id}
+                        onClick={() => {
+                          navigate(screen.id);
+                          setMenuOpen(false);
+                        }}
+                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${
+                          isActive
+                            ? 'bg-[#00C8C8] text-white'
+                            : 'text-gray-700 hover:bg-gray-100'
+                        }`}
+                      >
+                        <Icon className="w-5 h-5 flex-shrink-0" />
+                        <span className="text-sm font-medium">{screen.label}</span>
+                        {isActive && (
+                          <span className="ml-auto text-xs opacity-75">●</span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="mt-3 pt-3 border-t border-gray-100">
+                  <p className="text-[10px] text-gray-400 text-center">
+                    Menú de desarrollo para demo
+                  </p>
+                </div>
+              </div>
+            </>
+          )}
+        </>
+      )}
     </div>
   );
 }
