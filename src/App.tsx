@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Home, User, ShoppingBag, MessageSquare, Store, Tablet, LogIn, QrCode, ShoppingCart, Package } from 'lucide-react';
 import { HomeScreen } from './screens/HomeScreen';
@@ -14,6 +13,7 @@ import { CartScreen } from './screens/CartScreen';
 import { AIAssistantScreen } from './screens/AIAssistantScreen';
 import { KioskScreen } from './screens/KioskScreen';
 import { KioskCartScreen } from './screens/KioskCartScreen';
+import { PharmacyQRScreen } from './screens/PharmacyQRScreen';
 
 // IDs de ejemplo para la demo
 const DEMO_PHARMACY_ID = 'FM-2024-001';
@@ -36,6 +36,7 @@ const getScreenRoute = (screen: string): string => {
     'ai-assistant': `/asistente-ia/${DEMO_PHARMACY_ID}`,
     'kiosk': `/kiosko/${DEMO_PHARMACY_ID}`,
     'kiosk-cart': `/kiosko-carrito/${DEMO_PHARMACY_ID}`,
+    'pharmacy-qr': `/mi-qr/${DEMO_PHARMACY_ID}`,
   };
   return routes[screen] || screen;
 };
@@ -98,6 +99,7 @@ function AppContent() {
         <Route path="/asistente-ia/:pharmacyId" element={<AIAssistantScreen {...props} />} />
         <Route path="/kiosko/:pharmacyId" element={<KioskScreen {...props} />} />
         <Route path="/kiosko-carrito/:pharmacyId" element={<KioskCartScreen {...props} />} />
+        <Route path="/mi-qr/:pharmacyId" element={<PharmacyQRScreen {...props} />} />
         
         {/* Rutas con parámetros de farmacia y cliente */}
         <Route path="/cliente/:pharmacyId/:clientId" element={<ClientDashboard {...props} />} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Package, MessageSquare, TrendingUp, Users, ShoppingBag, ArrowLeft } from 'lucide-react';
+import { Package, MessageSquare, TrendingUp, Users, ShoppingBag, QrCode } from 'lucide-react';
 import { MockupContainer } from '../components/MockupContainer';
 
 interface PharmacyDashboardProps {
@@ -100,14 +100,24 @@ export const PharmacyDashboard: React.FC<PharmacyDashboardProps> = ({ onNavigate
           </div>
         </div>
 
-        {/* Botón destacado - Catálogo */}
-        <button
-          onClick={() => onNavigate('pharmacy-catalog')}
-          className="w-full bg-gradient-to-r from-[#00C8C8] to-[#007878] text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
-        >
-          <ShoppingBag className="w-5 h-5" />
-          <span>Gestionar Catálogo</span>
-        </button>
+        {/* Botones destacados */}
+        <div className="space-y-3">
+          <button
+            onClick={() => onNavigate('pharmacy-qr')}
+            className="w-full bg-gradient-to-r from-[#00C8C8] to-[#007878] text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
+          >
+            <QrCode className="w-5 h-5" />
+            <span>Descargar mi código QR</span>
+          </button>
+
+          <button
+            onClick={() => onNavigate('pharmacy-catalog')}
+            className="w-full bg-white border-2 border-[#00C8C8] text-[#007878] font-semibold py-4 px-6 rounded-2xl hover:bg-[#00C8C8]/10 transition-all flex items-center justify-center gap-2"
+          >
+            <ShoppingBag className="w-5 h-5" />
+            <span>Gestionar Catálogo</span>
+          </button>
+        </div>
       </div>
     </MockupContainer>
   );
