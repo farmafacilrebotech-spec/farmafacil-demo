@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-import { Home, User, ShoppingBag, MessageSquare, Store, Tablet, LogIn, QrCode, ShoppingCart, Package, MoreVertical, X } from 'lucide-react';
+import { Home, User, ShoppingBag, MessageSquare, Store, Tablet, LogIn, QrCode, ShoppingCart, Package, MoreVertical, X, TrendingUp, Users } from 'lucide-react';
 import { HomeScreen } from './screens/HomeScreen';
 import { LoginScreen } from './screens/LoginScreen';
 import { QRScanScreen } from './screens/QRScanScreen';
@@ -17,6 +17,10 @@ import { KioskCartScreen } from './screens/KioskCartScreen';
 import { KioskCatalogScreen } from './screens/KioskCatalogScreen';
 import { KioskAIAssistantScreen } from './screens/KioskAIAssistantScreen';
 import { PharmacyQRScreen } from './screens/PharmacyQRScreen';
+import { PharmacyOrdersScreen } from './screens/PharmacyOrdersScreen';
+import { PharmacyQueriesScreen } from './screens/PharmacyQueriesScreen';
+import { PharmacySearchStatsScreen } from './screens/PharmacySearchStatsScreen';
+import { PharmacyClientsScreen } from './screens/PharmacyClientsScreen';
 
 // IDs de ejemplo para la demo
 const DEMO_PHARMACY_ID = 'FM-2024-001';
@@ -76,6 +80,10 @@ function AppContent() {
     { id: `/asistente-ia/${DEMO_PHARMACY_ID}`, label: 'IA', icon: MessageSquare },
     { id: `/kiosko/${DEMO_PHARMACY_ID}`, label: 'Kiosko', icon: Tablet },
     { id: `/kiosko-carrito/${DEMO_PHARMACY_ID}`, label: 'Carr.Kiosk', icon: ShoppingCart },
+    { id: `/farmacia-pedidos/${DEMO_PHARMACY_ID}`, label: 'Pedidos Farm', icon: Package },
+    { id: `/farmacia-consultas/${DEMO_PHARMACY_ID}`, label: 'Consultas IA', icon: MessageSquare },
+    { id: `/farmacia-estadisticas/${DEMO_PHARMACY_ID}`, label: 'Estadísticas', icon: TrendingUp },
+    { id: `/farmacia-clientes/${DEMO_PHARMACY_ID}`, label: 'Clientes', icon: Users },
   ];
 
   const props = { onNavigate: handleNavigate };
@@ -109,6 +117,10 @@ function AppContent() {
         <Route path="/kiosko-catalogo/:pharmacyId" element={<KioskCatalogScreen {...props} />} />
         <Route path="/kiosko-asistente/:pharmacyId" element={<KioskAIAssistantScreen {...props} />} />
         <Route path="/mi-qr/:pharmacyId" element={<PharmacyQRScreen {...props} />} />
+        <Route path="/farmacia-pedidos/:pharmacyId" element={<PharmacyOrdersScreen {...props} />} />
+        <Route path="/farmacia-consultas/:pharmacyId" element={<PharmacyQueriesScreen {...props} />} />
+        <Route path="/farmacia-estadisticas/:pharmacyId" element={<PharmacySearchStatsScreen {...props} />} />
+        <Route path="/farmacia-clientes/:pharmacyId" element={<PharmacyClientsScreen {...props} />} />
         
         {/* Rutas con parámetros de farmacia y cliente */}
         <Route path="/cliente/:pharmacyId/:clientId" element={<ClientDashboard {...props} />} />

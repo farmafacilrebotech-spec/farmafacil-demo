@@ -1,4 +1,5 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { Package, MessageSquare, TrendingUp, Users, ShoppingBag, QrCode } from 'lucide-react';
 import { MockupContainer } from '../components/MockupContainer';
 
@@ -7,13 +8,16 @@ interface PharmacyDashboardProps {
 }
 
 export const PharmacyDashboard: React.FC<PharmacyDashboardProps> = ({ onNavigate }) => {
+  const { pharmacyId } = useParams<{ pharmacyId: string }>();
+  const currentPharmacyId = pharmacyId || 'FM-2024-001';
+
   return (
     <MockupContainer title="Dashboard Farmacia">
       <div className="p-6 min-h-[600px] overflow-y-auto">
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">Farmacia Centro</h1>
-          <p className="text-gray-500">Panel de gestión</p>
+          <h1 className="text-2xl font-bold text-gray-800">Farmacia Mediterráneo</h1>
+          <p className="text-gray-500">Panel de gestión · <span className="font-mono text-[#00C8C8]">{currentPharmacyId}</span></p>
         </div>
 
         {/* Métricas principales */}
@@ -30,10 +34,13 @@ export const PharmacyDashboard: React.FC<PharmacyDashboardProps> = ({ onNavigate
           </div>
         </div>
 
-        {/* Tarjetas de acceso */}
+        {/* Tarjetas de acceso rápido */}
         <div className="space-y-3 mb-6">
           {/* Pedidos recientes */}
-          <div className="bg-white border-2 border-gray-100 rounded-2xl p-4 hover:shadow-lg transition-all cursor-pointer">
+          <div 
+            onClick={() => onNavigate(`/farmacia-pedidos/${currentPharmacyId}`)}
+            className="bg-white border-2 border-gray-100 rounded-2xl p-4 hover:shadow-lg transition-all cursor-pointer"
+          >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-[#00C8C8] bg-opacity-10 rounded-xl flex items-center justify-center">
@@ -44,13 +51,13 @@ export const PharmacyDashboard: React.FC<PharmacyDashboardProps> = ({ onNavigate
                   <p className="text-sm text-gray-500">8 pendientes de confirmar</p>
                 </div>
               </div>
-              <span className="text-[#00C8C8] font-bold">→</span>
+              <span className="bg-yellow-100 text-yellow-700 text-xs font-bold px-2 py-1 rounded-full">8</span>
             </div>
           </div>
 
           {/* Consultas del asistente */}
           <div
-            onClick={() => onNavigate('ai-assistant')}
+            onClick={() => onNavigate(`/farmacia-consultas/${currentPharmacyId}`)}
             className="bg-white border-2 border-gray-100 rounded-2xl p-4 hover:shadow-lg transition-all cursor-pointer"
           >
             <div className="flex items-center justify-between">
@@ -63,12 +70,15 @@ export const PharmacyDashboard: React.FC<PharmacyDashboardProps> = ({ onNavigate
                   <p className="text-sm text-gray-500">12 consultas hoy</p>
                 </div>
               </div>
-              <span className="text-[#007878] font-bold">→</span>
+              <span className="bg-orange-100 text-orange-700 text-xs font-bold px-2 py-1 rounded-full">3</span>
             </div>
           </div>
 
           {/* Productos más buscados */}
-          <div className="bg-white border-2 border-gray-100 rounded-2xl p-4 hover:shadow-lg transition-all cursor-pointer">
+          <div 
+            onClick={() => onNavigate(`/farmacia-estadisticas/${currentPharmacyId}`)}
+            className="bg-white border-2 border-gray-100 rounded-2xl p-4 hover:shadow-lg transition-all cursor-pointer"
+          >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-[#00C8C8] bg-opacity-10 rounded-xl flex items-center justify-center">
@@ -76,7 +86,7 @@ export const PharmacyDashboard: React.FC<PharmacyDashboardProps> = ({ onNavigate
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-800">Productos buscados</h3>
-                  <p className="text-sm text-gray-500">Ver tendencias</p>
+                  <p className="text-sm text-gray-500">Ver tendencias y estadísticas</p>
                 </div>
               </div>
               <span className="text-[#00C8C8] font-bold">→</span>
@@ -84,14 +94,17 @@ export const PharmacyDashboard: React.FC<PharmacyDashboardProps> = ({ onNavigate
           </div>
 
           {/* Clientes activos */}
-          <div className="bg-white border-2 border-gray-100 rounded-2xl p-4 hover:shadow-lg transition-all cursor-pointer">
+          <div 
+            onClick={() => onNavigate(`/farmacia-clientes/${currentPharmacyId}`)}
+            className="bg-white border-2 border-gray-100 rounded-2xl p-4 hover:shadow-lg transition-all cursor-pointer"
+          >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-[#007878] bg-opacity-10 rounded-xl flex items-center justify-center">
                   <Users className="w-6 h-6 text-[#007878]" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-800">Clientes activos</h3>
+                  <h3 className="font-semibold text-gray-800">Clientes</h3>
                   <p className="text-sm text-gray-500">156 registrados</p>
                 </div>
               </div>
@@ -103,7 +116,7 @@ export const PharmacyDashboard: React.FC<PharmacyDashboardProps> = ({ onNavigate
         {/* Botones destacados */}
         <div className="space-y-3">
           <button
-            onClick={() => onNavigate('pharmacy-qr')}
+            onClick={() => onNavigate(`/mi-qr/${currentPharmacyId}`)}
             className="w-full bg-gradient-to-r from-[#00C8C8] to-[#007878] text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
           >
             <QrCode className="w-5 h-5" />
@@ -111,7 +124,7 @@ export const PharmacyDashboard: React.FC<PharmacyDashboardProps> = ({ onNavigate
           </button>
 
           <button
-            onClick={() => onNavigate('pharmacy-catalog')}
+            onClick={() => onNavigate(`/catalogo-farmacia/${currentPharmacyId}`)}
             className="w-full bg-white border-2 border-[#00C8C8] text-[#007878] font-semibold py-4 px-6 rounded-2xl hover:bg-[#00C8C8]/10 transition-all flex items-center justify-center gap-2"
           >
             <ShoppingBag className="w-5 h-5" />
@@ -122,4 +135,3 @@ export const PharmacyDashboard: React.FC<PharmacyDashboardProps> = ({ onNavigate
     </MockupContainer>
   );
 };
-
