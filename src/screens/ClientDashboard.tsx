@@ -33,10 +33,10 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({ onNavigate }) 
   const currentClientId = clientId || 'CLI-7842';
 
   const cards = [
-    { icon: Package, title: 'Mis Pedidos', color: '#00C8C8', screen: 'client-dashboard' },
-    { icon: Sparkles, title: 'Recomendaciones IA', color: '#00C8C8', screen: 'ai-assistant' },
-    { icon: ShoppingBag, title: 'Catálogo', color: '#00C8C8', screen: 'catalog' },
-    { icon: ShoppingCart, title: 'Carrito', color: '#00C8C8', screen: 'cart' },
+    { icon: Package, title: 'Mis Pedidos', color: '#00C8C8', screen: `/cliente-pedidos/${currentPharmacyCode}/${currentClientId}` },
+    { icon: Sparkles, title: 'Recomendaciones IA', color: '#00C8C8', screen: `/asistente-ia/${currentPharmacyCode}` },
+    { icon: ShoppingBag, title: 'Catálogo', color: '#00C8C8', screen: `/catalogo/${currentPharmacyCode}/${currentClientId}` },
+    { icon: ShoppingCart, title: 'Carrito', color: '#00C8C8', screen: `/carrito/${currentPharmacyCode}/${currentClientId}` },
   ];
 
   return (
@@ -114,7 +114,7 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({ onNavigate }) 
 
         {/* Botón destacado - Perfil */}
         <button
-          onClick={() => onNavigate('profile')}
+          onClick={() => onNavigate(`/perfil/${currentPharmacyCode}/${currentClientId}`)}
           className="w-full bg-gradient-to-r from-[#00C8C8] to-[#007878] text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
         >
           <User className="w-5 h-5" />

@@ -21,6 +21,7 @@ import { PharmacyOrdersScreen } from './screens/PharmacyOrdersScreen';
 import { PharmacyQueriesScreen } from './screens/PharmacyQueriesScreen';
 import { PharmacySearchStatsScreen } from './screens/PharmacySearchStatsScreen';
 import { PharmacyClientsScreen } from './screens/PharmacyClientsScreen';
+import { ClientOrdersScreen } from './screens/ClientOrdersScreen';
 
 // IDs de ejemplo para la demo
 const DEMO_PHARMACY_ID = 'FM-2024-001';
@@ -124,6 +125,7 @@ function AppContent() {
         
         {/* Rutas con parámetros de farmacia y cliente */}
         <Route path="/cliente/:pharmacyId/:clientId" element={<ClientDashboard {...props} />} />
+        <Route path="/cliente-pedidos/:pharmacyId/:clientId" element={<ClientOrdersScreen {...props} />} />
         <Route path="/perfil/:pharmacyId/:clientId" element={<ProfileScreen {...props} />} />
         <Route path="/catalogo/:pharmacyId/:clientId" element={<CatalogScreen {...props} />} />
         <Route path="/carrito/:pharmacyId/:clientId" element={<CartScreen {...props} />} />

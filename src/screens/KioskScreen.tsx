@@ -121,12 +121,12 @@ export const KioskScreen: React.FC<KioskScreenProps> = ({ onNavigate }) => {
           <div className="grid grid-cols-2 gap-4 w-full max-w-lg">
             <button
               onClick={() => onNavigate(`/kiosko-catalogo/${currentPharmacyId}`)}
-              className="bg-white hover:bg-gray-50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 aspect-square flex flex-col items-center justify-center"
+              className="bg-white hover:bg-gray-50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 h-44 flex flex-col items-center justify-center"
             >
-              <div className="w-16 h-16 bg-[#00C8C8] rounded-2xl flex items-center justify-center mb-4">
+              <div className="w-16 h-16 bg-[#00C8C8] rounded-2xl flex items-center justify-center mb-3">
                 <Search className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-lg font-bold text-gray-800 text-center mb-1">
+              <h3 className="text-lg font-bold text-gray-800 text-center h-12 flex items-center">
                 Buscar producto
               </h3>
               <p className="text-xs text-gray-600 text-center">
@@ -136,12 +136,12 @@ export const KioskScreen: React.FC<KioskScreenProps> = ({ onNavigate }) => {
 
             <button
               onClick={() => onNavigate(`/kiosko-asistente/${currentPharmacyId}`)}
-              className="bg-white hover:bg-gray-50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 aspect-square flex flex-col items-center justify-center"
+              className="bg-white hover:bg-gray-50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 h-44 flex flex-col items-center justify-center"
             >
-              <div className="w-16 h-16 bg-[#00C8C8] rounded-2xl flex items-center justify-center mb-4">
+              <div className="w-16 h-16 bg-[#00C8C8] rounded-2xl flex items-center justify-center mb-3">
                 <MessageSquare className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-lg font-bold text-gray-800 text-center mb-1">
+              <h3 className="text-lg font-bold text-gray-800 text-center h-12 flex items-center">
                 Asistente IA
               </h3>
               <p className="text-xs text-gray-600 text-center">
@@ -152,12 +152,12 @@ export const KioskScreen: React.FC<KioskScreenProps> = ({ onNavigate }) => {
             {/* Botón QR - Muestra modal con el QR de la farmacia */}
             <button
               onClick={() => setShowQRModal(true)}
-              className="bg-white hover:bg-gray-50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 aspect-square flex flex-col items-center justify-center"
+              className="bg-white hover:bg-gray-50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 h-44 flex flex-col items-center justify-center"
             >
-              <div className="w-16 h-16 bg-[#00C8C8] rounded-2xl flex items-center justify-center mb-4">
+              <div className="w-16 h-16 bg-[#00C8C8] rounded-2xl flex items-center justify-center mb-3">
                 <QrCode className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-lg font-bold text-gray-800 text-center mb-1">
+              <h3 className="text-lg font-bold text-gray-800 text-center h-12 flex items-center">
                 Accede a tu cuenta
               </h3>
               <p className="text-xs text-gray-600 text-center">
@@ -167,12 +167,12 @@ export const KioskScreen: React.FC<KioskScreenProps> = ({ onNavigate }) => {
 
             <button
               onClick={() => onNavigate(`/kiosko-carrito/${currentPharmacyId}`)}
-              className="bg-white hover:bg-gray-50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 aspect-square flex flex-col items-center justify-center"
+              className="bg-white hover:bg-gray-50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 h-44 flex flex-col items-center justify-center"
             >
-              <div className="w-16 h-16 bg-[#00C8C8] rounded-2xl flex items-center justify-center mb-4">
+              <div className="w-16 h-16 bg-[#00C8C8] rounded-2xl flex items-center justify-center mb-3">
                 <ShoppingCart className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-lg font-bold text-gray-800 text-center mb-1">
+              <h3 className="text-lg font-bold text-gray-800 text-center h-12 flex items-center">
                 Mi carrito
               </h3>
               <p className="text-xs text-gray-600 text-center">

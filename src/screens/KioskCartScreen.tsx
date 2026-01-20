@@ -133,30 +133,30 @@ export const KioskCartScreen: React.FC<KioskCartScreenProps> = ({ onNavigate }) 
 
   return (
     <MockupContainer title="Carrito Kiosko">
-      <div className="min-h-[600px] flex flex-col">
+      <div className="min-h-[600px] flex flex-col bg-gradient-to-br from-[#00C8C8] to-[#007878]">
         {/* Header */}
-        <div className="p-6 pb-4 bg-white border-b border-gray-100">
+        <div className="p-6 pb-4">
           <div className="flex items-center justify-between mb-4">
             <button
               onClick={() => onNavigate(`/kiosko/${currentPharmacyId}`)}
-              className="text-gray-600 hover:text-gray-800 flex items-center gap-2"
+              className="text-white/80 hover:text-white flex items-center gap-2"
             >
               <ArrowLeft className="w-5 h-5" />
               <span>Volver</span>
             </button>
             <PharmacyLogo size="sm" />
           </div>
-          <h2 className="text-2xl font-bold text-gray-800">Mi Carrito</h2>
-          <p className="text-gray-500 text-sm">{cartItems.length} productos</p>
+          <h2 className="text-2xl font-bold text-white">Mi Carrito</h2>
+          <p className="text-white/80 text-sm">{cartItems.length} productos</p>
         </div>
 
         {/* Lista de productos */}
-        <div className="flex-1 overflow-y-auto p-6">
+        <div className="flex-1 overflow-y-auto p-6 pt-2">
           <div className="space-y-4">
             {cartItems.map((item) => (
               <div
                 key={item.id}
-                className="bg-white border-2 border-gray-100 rounded-xl p-4"
+                className="bg-white rounded-2xl p-4 shadow-lg"
               >
                 <div className="flex items-start gap-3">
                   {/* Imagen */}
@@ -207,12 +207,12 @@ export const KioskCartScreen: React.FC<KioskCartScreenProps> = ({ onNavigate }) 
         </div>
 
         {/* Footer - Total y botones de impresión */}
-        <div className="p-6 bg-white border-t-2 border-gray-100">
+        <div className="p-6 bg-white/10 backdrop-blur-sm">
           {/* Total */}
-          <div className="bg-gray-50 rounded-xl p-4 mb-4">
+          <div className="bg-white rounded-2xl p-4 mb-4 shadow-lg">
             <div className="flex items-center justify-between">
               <span className="text-lg font-bold text-gray-800">Total</span>
-              <span className="text-2xl font-bold text-[#00C8C8]">
+              <span className="text-2xl font-bold text-[#007878]">
                 €{total.toFixed(2)}
               </span>
             </div>
@@ -220,7 +220,7 @@ export const KioskCartScreen: React.FC<KioskCartScreenProps> = ({ onNavigate }) 
 
           {/* Mensaje de error */}
           {errorMessage && (
-            <div className="bg-red-50 border-2 border-red-200 rounded-xl p-3 mb-4">
+            <div className="bg-red-100 border-2 border-red-300 rounded-xl p-3 mb-4">
               <p className="text-sm text-red-800 text-center">
                 <strong>Error:</strong> {errorMessage}
               </p>
@@ -231,7 +231,7 @@ export const KioskCartScreen: React.FC<KioskCartScreenProps> = ({ onNavigate }) 
           <div className="space-y-3">
             <button
               onClick={() => handlePrintTicket(false)}
-              className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-4 rounded-xl shadow-lg transition-colors flex items-center justify-center gap-2"
+              className="w-full bg-white hover:bg-gray-50 text-yellow-600 font-semibold py-4 rounded-2xl shadow-xl transition-colors flex items-center justify-center gap-2"
             >
               <Printer className="w-5 h-5" />
               <span>Imprimir Ticket (Pendiente de Pago)</span>
@@ -239,14 +239,14 @@ export const KioskCartScreen: React.FC<KioskCartScreenProps> = ({ onNavigate }) 
 
             <button
               onClick={handlePrintAndPay}
-              className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold py-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"
+              className="w-full bg-white hover:bg-gray-50 text-green-600 font-semibold py-4 rounded-2xl shadow-xl transition-all flex items-center justify-center gap-2"
             >
               <CreditCard className="w-5 h-5" />
               <span>Pagar con TPV e Imprimir</span>
             </button>
           </div>
 
-          <p className="text-xs text-gray-500 text-center mt-3">
+          <p className="text-xs text-white/80 text-center mt-3">
             🖨️ El ticket se imprimirá automáticamente
           </p>
         </div>
